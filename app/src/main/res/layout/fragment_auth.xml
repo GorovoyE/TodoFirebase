@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.AuthFragment">
+    tools:context=".presentation.auth.AuthFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,10 +24,22 @@
             android:hint="Введите пароль" />
 
         <Button
-            android:id="@+id/button_signup"
+            android:id="@+id/button_signIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Войти" />
+
+        <Button
+            android:id="@+id/button_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Зарегистрироваться" />
+
+        <Button
+            android:id="@+id/button_signOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выйти" />
 
     </LinearLayout>
 </FrameLayout>
