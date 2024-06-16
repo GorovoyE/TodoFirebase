@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EditFragment : Fragment() {
-
     private lateinit var binding: FragmentEditBinding
     val viewModel: EditViewModel by viewModels()
 
@@ -51,7 +50,6 @@ class EditFragment : Fragment() {
                 android.text.format.DateFormat.format("dd/MM/yyyy hh:mm", currentDate).toString()
             viewModel.addNote(
                 NoteEntity(
-                    id = "",
                     title = binding.editTextTitle.text.toString(),
                     description = binding.ediTextDescription.text.toString(),
                     status = 0,

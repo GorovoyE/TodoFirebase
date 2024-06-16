@@ -20,8 +20,14 @@ class TodoRepositoryImpl @Inject constructor(
             .document(auth.currentUser?.uid ?: "")
             .collection(CollectionFirestore.NOTES)
             .add(note)
-            .addOnCompleteListener {
+            .addOnSuccessListener {
                 Log.d("TodoRepositoryImpl", "Note added ${note}")
+            }
+            .addOnFailureListener {
+                Log.d("TodoRepositoryImpl", "Note not added")
+            }
+            .addOnCompleteListener {
+
             }
     }
 
@@ -32,7 +38,7 @@ class TodoRepositoryImpl @Inject constructor(
             .collection(CollectionFirestore.NOTES)
             .get()
             .addOnSuccessListener {
-                val notes = it.toObjects(NoteModel::class.java).toList()
+                val notes = it.toObjects(NoteModel::class.java)
                 notesLIst = notes
                 Log.d("TodoRepositoryImpl", "Notes get success ${notes}")
             }

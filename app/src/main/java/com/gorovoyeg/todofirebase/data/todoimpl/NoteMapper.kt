@@ -26,5 +26,5 @@ class NoteMapper @Inject constructor() {
     }
 
     fun mapNoteListModelToListEntity(noteListModel: List<NoteModel>) =
-        noteListModel.map { mapNoteModelToEntity(it) }
+        noteListModel.map { mapNoteModelToEntity(it) }.toList()
 }
