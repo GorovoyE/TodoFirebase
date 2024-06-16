@@ -14,7 +14,7 @@ class TodoRepositoryImpl @Inject constructor(
     val mapper: NoteMapper,
     var noteModel: NoteModel
 ) : TodoRepository {
-
+    var notesLIst = listOf<NoteModel>()
 
     override suspend fun addNote(note: NoteEntity) {
         database.collection(CollectionFirestore.NOTES)
@@ -32,7 +32,6 @@ class TodoRepositoryImpl @Inject constructor(
     override suspend fun getNoteList(): List<NoteEntity> {
         // TODO список приходит спустя некоторое время, стоит поставить заглушку или использовать стейт (предпочтительнее)
         // TODO возможно, стоит кешировать данные, например, в sharedpref
-        var notesLIst = listOf<NoteModel>()
         database.collection(CollectionFirestore.NOTES)
             .document(auth.currentUser?.uid ?: "")
             .collection(CollectionFirestore.NOTES)

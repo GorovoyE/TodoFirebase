@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gorovoyeg.todofirebase.domain.auth.SignOutUseCase
+import com.gorovoyeg.todofirebase.domain.todo.DeleteNoteUseCase
 import com.gorovoyeg.todofirebase.domain.todo.GetNoteListUseCase
 import com.gorovoyeg.todofirebase.domain.todo.NoteEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainListViewModel @Inject constructor(
     val getNoteListUseCase: GetNoteListUseCase,
-    val signOutUseCase: SignOutUseCase
+    val signOutUseCase: SignOutUseCase,
+    val deleteNoteUseCase: DeleteNoteUseCase
 ) : ViewModel() {
 
     private val _todoList = MutableLiveData<List<NoteEntity>>()
@@ -22,13 +24,19 @@ class MainListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _todoList.value = getNoteListUseCase.invoke()
+            _todoList.postValue(getNoteListUseCase.invoke())
         }
     }
 
     fun signOut() {
         viewModelScope.launch {
             signOutUseCase.invoke()
+        }
+    }
+
+    fun deleteItem(noteEntity: NoteEntity) {
+        viewModelScope.launch {
+            deleteNoteUseCase.invoke(noteEntity)
         }
     }
 }

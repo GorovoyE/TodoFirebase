@@ -35,7 +35,7 @@ class AuthRepositoryImpl @Inject constructor(
                 if (task.isSuccessful) {
                     Log.d("AuthRepositoryImpl", "signIn success")
                 } else {
-                    Log.d("AuthRepositoryImpl", "signIn success")
+                    Log.d("AuthRepositoryImpl", "signIn failure")
                 }
             }
     }

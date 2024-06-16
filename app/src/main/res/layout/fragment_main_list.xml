@@ -16,12 +16,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_grey"
-            app:title="Main" />
+            app:title="Main">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|end"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="18dp"
+                tools:text="1" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_main_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:listitem="@layout/list_item" />
 

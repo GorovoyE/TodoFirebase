@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gorovoyeg.todofirebase.R
 import com.gorovoyeg.todofirebase.databinding.FragmentMainListBinding
 import com.gorovoyeg.todofirebase.presentation.auth.AuthFragment
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainListFragment : Fragment() {
 
-    private lateinit var adapter: TodoListAdapter
+    private val adapter = TodoListAdapter()
     private lateinit var binding: FragmentMainListBinding
     val viewModel: MainListViewModel by viewModels()
 
@@ -45,15 +46,24 @@ class MainListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = TodoListAdapter()
+
         binding.recyclerViewMainList.adapter = adapter
-        viewModel.todoList.observe(requireActivity()) {
-            // TODO список заметок формируется, приходит с сервера, но не доходит до апатера: продебажить путь
+        binding.recyclerViewMainList.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.todoList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
         adapter.onItemClickListener = {
-            // TODO добавить логику вызова EditFragment и передать ему объект NoteEntity или его поля
+            EditFragment.newInstance(it)
+            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, EditFragment())
+                .commit()
+        }
+
+        adapter.onDeleteClickListener = {
+            viewModel.deleteItem(it)
         }
 
         binding.buttonSignout.setOnClickListener {

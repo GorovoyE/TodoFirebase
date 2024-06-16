@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -49,35 +50,68 @@ class AuthFragment : Fragment() {
     }
 
     private fun signInUser() {
-        // TODO стоит добавить информирование юзера о неуспешной попытке входа (сейчас все в логах)
+        // TODO стоит добавить информирование юзера о неуспешной попытке входа
         var userIsOnline = false
         binding.buttonSignIn.setOnClickListener {
-            viewModel.getSignIn(
-                login = binding.editTextLogin.text.toString() + "@gmail.com",
-                password = binding.editTextPassword.text.toString()
-            )
-            viewLifecycleOwner.lifecycleScope.launch {
-                userIsOnline = viewModel.checkCurrentUserIsOnline()
+            val login = binding.editTextLogin.text.toString()
+            val password = binding.editTextPassword.text.toString()
+            if (login.trim().isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Логин не может быть пустым",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (password.length <= 8) {
+                Toast.makeText(
+                    requireContext(),
+                    "Пароль не может быть менее 8 символов",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    userIsOnline = viewModel.checkCurrentUserIsOnline()
+                }
+                viewModel.getSignIn(
+                    login = binding.editTextLogin.text.toString() + "@gmail.com",
+                    password = binding.editTextPassword.text.toString()
+                )
+                if (userIsOnline) {
+                    navigateToMainScreen()
+                }
             }
-            if (userIsOnline) {
-                navigateToMainScreen()
-            }
-
         }
     }
 
+
     private fun signUpUser() {
-        // TODO стоит добавить информирование юзера о неуспешной попытке регистрации (сейчас все в логах)
+        // TODO стоит добавить информирование юзера о неуспешной попытке регистрации
         binding.buttonSignUp.setOnClickListener {
-            viewModel.getSignUp(
-                login = binding.editTextLogin.text.toString() + "@gmail.com",
-                password = binding.editTextPassword.text.toString()
-            )
+            val login = binding.editTextLogin.text.toString()
+            val password = binding.editTextPassword.text.toString()
+            if (login.trim().isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Логин не может быть пустым",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (password.length <= 8) {
+                Toast.makeText(
+                    requireContext(),
+                    "Пароль не может быть менее 8 символов",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                viewModel.getSignUp(
+                    login = binding.editTextLogin.text.toString() + "@gmail.com",
+                    password = binding.editTextPassword.text.toString()
+                )
+            }
         }
     }
 
 
     private fun navigateToMainScreen() {
+        requireActivity().supportFragmentManager.popBackStack()
         requireActivity().supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.fragment_container, MainListFragment())
