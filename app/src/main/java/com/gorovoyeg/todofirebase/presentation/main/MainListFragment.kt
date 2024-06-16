@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainListFragment : Fragment() {
 
-    private val adapter = TodoListAdapter()
+    private lateinit var adapter: TodoListAdapter
     private lateinit var binding: FragmentMainListBinding
     val viewModel: MainListViewModel by viewModels()
 
@@ -37,18 +37,19 @@ class MainListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainListBinding.inflate(inflater, container, false)
-
-        binding.recyclerViewMainList.adapter = adapter
-        viewModel.todoList.observe(requireActivity()) {
-            adapter.submitList(it)
-        }
-
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = TodoListAdapter()
+        binding.recyclerViewMainList.adapter = adapter
+        viewModel.todoList.observe(requireActivity()) {
+            adapter.submitList(it)
+        }
+
         binding.buttonSignout.setOnClickListener {
             viewModel.signOut()
             navigateTo(AuthFragment())

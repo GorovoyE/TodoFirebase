@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.gorovoyeg.todofirebase.domain.todo.NoteEntity
 import com.gorovoyeg.todofirebase.domain.todo.TodoRepository
+import com.gorovoyeg.todofirebase.util.CollectionFirestore
 import javax.inject.Inject
 
 class TodoRepositoryImpl @Inject constructor(
@@ -25,9 +26,6 @@ class TodoRepositoryImpl @Inject constructor(
             }
             .addOnFailureListener {
                 Log.d("TodoRepositoryImpl", "Note not added")
-            }
-            .addOnCompleteListener {
-
             }
     }
 
@@ -90,9 +88,4 @@ class TodoRepositoryImpl @Inject constructor(
             }
         return mapper.mapNoteModelToEntity(noteModel)
     }
-}
-
-object CollectionFirestore {
-    val NOTES = "notes"
-    val USER = "user"
 }

@@ -1,6 +1,7 @@
 package com.gorovoyeg.todofirebase.presentation.edit
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,6 @@ class EditFragment : Fragment() {
     private lateinit var binding: FragmentEditBinding
     val viewModel: EditViewModel by viewModels()
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -46,8 +46,7 @@ class EditFragment : Fragment() {
     private fun onReadyNoteClicked() {
         binding.buttonReady.setOnClickListener {
             val currentDate = System.currentTimeMillis()
-            val date =
-                android.text.format.DateFormat.format("dd/MM/yyyy hh:mm", currentDate).toString()
+            val date = DateFormat.format(DATE_FORMAT, currentDate).toString()
             viewModel.addNote(
                 NoteEntity(
                     title = binding.editTextTitle.text.toString(),
@@ -71,6 +70,7 @@ class EditFragment : Fragment() {
     companion object {
         private const val ARG_PARAM1 = "param1"
         private const val ARG_PARAM2 = "param2"
+        private const val DATE_FORMAT = "dd/MM/yyyy hh:mm"
 
 
         @JvmStatic

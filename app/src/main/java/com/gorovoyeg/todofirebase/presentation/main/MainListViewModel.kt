@@ -17,7 +17,6 @@ class MainListViewModel @Inject constructor(
     val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
-
     private val _todoList = MutableLiveData<List<NoteEntity>>()
     val todoList: LiveData<List<NoteEntity>> = _todoList
 
