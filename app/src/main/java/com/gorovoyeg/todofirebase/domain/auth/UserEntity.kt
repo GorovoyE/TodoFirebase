@@ -1,5 +1,7 @@
 package com.gorovoyeg.todofirebase.domain.auth
 
-data class UserEntity(
+import javax.inject.Inject
+
+data class UserEntity @Inject constructor(
     val userName: String
 )

@@ -1,19 +1,11 @@
 package com.gorovoyeg.todofirebase.domain.todo
 
-import java.util.Date
+import javax.inject.Inject
 
-data class NoteEntity(
-    val id: Int = UNDEFINED_ID,
+data class NoteEntity @Inject constructor(
+    val id: String,
     val title: String,
     val description: String,
-    val status: Status,
-    val data: Date
-) {
-    companion object {
-        const val UNDEFINED_ID = -1
-    }
-}
-
-enum class Status {
-    NEW, INWORK, DONE
-}
+    val status: Int,
+    val date: String
+)

@@ -7,41 +7,59 @@ import androidx.lifecycle.viewModelScope
 import com.gorovoyeg.todofirebase.data.authimpl.AuthRepositoryImpl
 import com.gorovoyeg.todofirebase.domain.auth.AuthSignInUseCase
 import com.gorovoyeg.todofirebase.domain.auth.AuthSignUpUseCase
-import com.gorovoyeg.todofirebase.domain.auth.CurrentUserOnlineUseCase
-import com.gorovoyeg.todofirebase.domain.auth.SignOutUseCase
+import com.gorovoyeg.todofirebase.domain.auth.GetCurrentUserOnlineUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.math.log
 
-class AuthViewModel : ViewModel() {
-    private val repository = AuthRepositoryImpl()
-    private val signUpUseCase = AuthSignUpUseCase(repository)
-    private val signInUseCase = AuthSignInUseCase(repository)
-    private val signOutUseCase = SignOutUseCase(repository)
-    private val currentUserOnlineUseCase = CurrentUserOnlineUseCase(repository)
-    private val _isUserSignIn = MutableLiveData<Boolean>()
-    val isUserSignIn: LiveData<Boolean> = _isUserSignIn
+@HiltViewModel
+class AuthViewModel @Inject constructor(
+    val signUpUseCase : AuthSignUpUseCase,
+    val signInUseCase : AuthSignInUseCase,
+    val getCurrentUserOnlineUseCase : GetCurrentUserOnlineUseCase
+) : ViewModel() {
 
 
-    init {
-        viewModelScope.launch {
-            _isUserSignIn.value = currentUserOnlineUseCase()
-        }
-    }
+    private val _result = MutableLiveData<Boolean>()
+    val result: LiveData<Boolean>
+        get() = _result
 
-    fun signOut() {
-        viewModelScope.launch {
-            signOutUseCase.invoke()
-        }
-    }
 
     fun getSignUp(login: String, password: String) {
-        viewModelScope.launch {
-            signUpUseCase(login = login, password = password)
+        if (validateData(login, password)) {
+            viewModelScope.launch {
+                signUpUseCase(login = login, password = password)
+            }
         }
     }
 
     fun getSignIn(login: String, password: String) {
-        viewModelScope.launch {
-            signInUseCase(login = login, password = password)
+        if (validateData(login, password)) {
+            _result.value = true
+            viewModelScope.launch {
+                signInUseCase(login = login, password = password)
+            }
+        } else {
+            _result.value = false
         }
     }
+
+    suspend fun checkCurrentUserIsOnline(): Boolean {
+        return getCurrentUserOnlineUseCase()
+    }
+
+    private fun validateLogin(login: String): Boolean {
+        return login.trim().isNotEmpty()
+    }
+
+    private fun validatePassword(password: String): Boolean {
+        val wrongPassword = password.trim().length > 6
+        return (password.isNotEmpty() && wrongPassword)
+    }
+
+    private fun validateData(login: String, password: String): Boolean {
+        return (validateLogin(login) && validatePassword(password))
+    }
+
 }

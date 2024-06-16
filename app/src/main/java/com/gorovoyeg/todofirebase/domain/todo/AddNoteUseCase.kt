@@ -1,6 +1,8 @@
 package com.gorovoyeg.todofirebase.domain.todo
 
-class AddNoteUseCase(
+import javax.inject.Inject
+
+class AddNoteUseCase @Inject constructor(
     private val repository: TodoRepository
 ) {
 

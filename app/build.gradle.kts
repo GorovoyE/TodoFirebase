@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.firebase)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -53,10 +55,13 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-//    kapt(libs.androidx.lifecycle.compiler)
+    implementation(libs.gson)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

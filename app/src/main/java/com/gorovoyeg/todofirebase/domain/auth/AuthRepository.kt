@@ -8,5 +8,5 @@ interface AuthRepository {
 
     suspend fun signOut()
 
-    suspend fun checkCurrentUserOnline(): Boolean
+    suspend fun checkCurrentUserisAuth(): Boolean
 }

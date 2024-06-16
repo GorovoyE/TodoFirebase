@@ -1,6 +1,8 @@
 package com.gorovoyeg.todofirebase.domain.auth
 
-class AuthSignUpUseCase(
+import javax.inject.Inject
+
+class AuthSignUpUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
 
