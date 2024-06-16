@@ -49,6 +49,7 @@ class AuthFragment : Fragment() {
     }
 
     private fun signInUser() {
+        // TODO стоит добавить информирование юзера о неуспешной попытке входа (сейчас все в логах)
         var userIsOnline = false
         binding.buttonSignIn.setOnClickListener {
             viewModel.getSignIn(
@@ -66,6 +67,7 @@ class AuthFragment : Fragment() {
     }
 
     private fun signUpUser() {
+        // TODO стоит добавить информирование юзера о неуспешной попытке регистрации (сейчас все в логах)
         binding.buttonSignUp.setOnClickListener {
             viewModel.getSignUp(
                 login = binding.editTextLogin.text.toString() + "@gmail.com",

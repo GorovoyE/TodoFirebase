@@ -30,6 +30,8 @@ class TodoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getNoteList(): List<NoteEntity> {
+        // TODO список приходит спустя некоторое время, стоит поставить заглушку или использовать стейт (предпочтительнее)
+        // TODO возможно, стоит кешировать данные, например, в sharedpref
         var notesLIst = listOf<NoteModel>()
         database.collection(CollectionFirestore.NOTES)
             .document(auth.currentUser?.uid ?: "")

@@ -47,6 +47,7 @@ class EditFragment : Fragment() {
         binding.buttonReady.setOnClickListener {
             val currentDate = System.currentTimeMillis()
             val date = DateFormat.format(DATE_FORMAT, currentDate).toString()
+            // TODO реализовать логику изменения состояние заметки в зависимости от статуса
             viewModel.addNote(
                 NoteEntity(
                     title = binding.editTextTitle.text.toString(),

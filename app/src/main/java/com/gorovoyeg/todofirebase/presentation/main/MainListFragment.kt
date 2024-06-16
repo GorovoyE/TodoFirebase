@@ -40,6 +40,7 @@ class MainListFragment : Fragment() {
         return binding.root
     }
 
+    // TODO добавить показ количества задач со статусом "новая"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +48,12 @@ class MainListFragment : Fragment() {
         adapter = TodoListAdapter()
         binding.recyclerViewMainList.adapter = adapter
         viewModel.todoList.observe(requireActivity()) {
+            // TODO список заметок формируется, приходит с сервера, но не доходит до апатера: продебажить путь
             adapter.submitList(it)
+        }
+
+        adapter.onItemClickListener = {
+            // TODO добавить логику вызова EditFragment и передать ему объект NoteEntity или его поля
         }
 
         binding.buttonSignout.setOnClickListener {
