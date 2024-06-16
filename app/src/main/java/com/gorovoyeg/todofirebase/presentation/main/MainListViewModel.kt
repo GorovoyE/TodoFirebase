@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainListViewModel @Inject constructor(
-    val getNoteListUseCase : GetNoteListUseCase,
-    val signOutUseCase : SignOutUseCase
+    val getNoteListUseCase: GetNoteListUseCase,
+    val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
 

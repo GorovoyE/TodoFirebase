@@ -4,20 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gorovoyeg.todofirebase.data.authimpl.AuthRepositoryImpl
 import com.gorovoyeg.todofirebase.domain.auth.AuthSignInUseCase
 import com.gorovoyeg.todofirebase.domain.auth.AuthSignUpUseCase
 import com.gorovoyeg.todofirebase.domain.auth.GetCurrentUserOnlineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    val signUpUseCase : AuthSignUpUseCase,
-    val signInUseCase : AuthSignInUseCase,
-    val getCurrentUserOnlineUseCase : GetCurrentUserOnlineUseCase
+    val signUpUseCase: AuthSignUpUseCase,
+    val signInUseCase: AuthSignInUseCase,
+    val getCurrentUserOnlineUseCase: GetCurrentUserOnlineUseCase
 ) : ViewModel() {
 
 

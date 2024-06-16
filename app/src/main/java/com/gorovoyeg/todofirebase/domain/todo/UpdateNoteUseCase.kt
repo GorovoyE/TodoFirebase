@@ -1,6 +1,5 @@
 package com.gorovoyeg.todofirebase.domain.todo
 
-import com.gorovoyeg.todofirebase.domain.auth.AuthRepository
 import javax.inject.Inject
 
 class UpdateNoteUseCase @Inject constructor(

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.gorovoyeg.todofirebase.R
 import com.gorovoyeg.todofirebase.databinding.FragmentMainListBinding
 import com.gorovoyeg.todofirebase.presentation.auth.AuthFragment
@@ -14,11 +13,7 @@ import com.gorovoyeg.todofirebase.presentation.edit.EditFragment
 import com.gorovoyeg.todofirebase.presentation.main.adapter.TodoListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MainListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 @AndroidEntryPoint
 class MainListFragment : Fragment() {
 
@@ -26,7 +21,6 @@ class MainListFragment : Fragment() {
     private lateinit var binding: FragmentMainListBinding
     val viewModel: MainListViewModel by viewModels()
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 

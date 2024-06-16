@@ -1,11 +1,8 @@
 package com.gorovoyeg.todofirebase.data.authimpl
 
 import android.util.Log
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
 import com.gorovoyeg.todofirebase.domain.auth.AuthRepository
 import javax.inject.Inject
 

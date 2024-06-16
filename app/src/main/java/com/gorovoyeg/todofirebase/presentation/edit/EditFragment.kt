@@ -12,11 +12,7 @@ import com.gorovoyeg.todofirebase.domain.todo.NoteEntity
 import com.gorovoyeg.todofirebase.presentation.main.MainListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EditFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 @AndroidEntryPoint
 class EditFragment : Fragment() {
 

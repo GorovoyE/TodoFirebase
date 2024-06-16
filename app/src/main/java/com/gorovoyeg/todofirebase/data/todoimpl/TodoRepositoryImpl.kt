@@ -2,13 +2,9 @@ package com.gorovoyeg.todofirebase.data.todoimpl
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.gorovoyeg.todofirebase.domain.todo.NoteEntity
 import com.gorovoyeg.todofirebase.domain.todo.TodoRepository
-import java.util.Date
 import javax.inject.Inject
 
 class TodoRepositoryImpl @Inject constructor(
